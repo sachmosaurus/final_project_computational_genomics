@@ -124,8 +124,7 @@ All parameter configurations are defined at the top of each script. The six conf
 | local_gap_friendly | local | +2 | -8 | -1 | -1 |
 
 ---
-
-## Expected Output (Sample)
+## Quick Sanity Check — Verifying flip_demo.py Runs Correctly
 
 Running `python3 flip_demo.py` should produce output including:
 
@@ -137,3 +136,10 @@ DEMO 2 — Parameter-induced flip (point mutation vs. indel pair)
 MISMATCH-FRIENDLY: score=22  CIGAR=12M
 GAP-FRIENDLY:      score=22  CIGAR=5M1D1I6M
 ```
+
+
+## Expected Output (Full Pipeline)
+
+Running the full pipeline produces the following:
+
+![Expected output](docs/expected_output.png)
