@@ -142,4 +142,4 @@ GAP-FRIENDLY:      score=22  CIGAR=5M1D1I6M
 
 Running the full pipeline produces the following:
 
-![Expected output](docs/expected_output.png)
+![Expected output](expected_output.png)
