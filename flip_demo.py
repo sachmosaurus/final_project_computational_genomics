@@ -15,6 +15,22 @@ Requires: pip install biopython
 """
 
 from Bio import Align
+import sys, os
+
+os.makedirs("sample_output", exist_ok=True)
+
+class _Tee:
+    def __init__(self, *streams):
+        self.streams = streams
+    def write(self, data):
+        for s in self.streams:
+            s.write(data)
+    def flush(self):
+        for s in self.streams:
+            s.flush()
+
+_log = open("sample_output/flip_demo_output.txt", "w")
+sys.stdout = _Tee(sys.__stdout__, _log)
 
 
 def make_aligner(match, mismatch, open_gap, extend_gap):

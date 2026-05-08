@@ -59,7 +59,7 @@ require("samtools", "sudo apt install samtools")
 # ─── Paths ────────────────────────────────────────────────────────────────────
 
 BAM_DIR  = Path("ecoli_output")
-REF      = Path("ecoli_k12.fna")
+REF      = Path("tested_genome/ecoli_k12.fna")
 OUT_DIR  = Path("vcf_output")
 OUT_DIR.mkdir(exist_ok=True)
 

@@ -40,7 +40,7 @@ for cmd, hint in [
     if subprocess.run(["which", cmd], capture_output=True).returncode != 0:
         sys.exit(f"\nERROR: '{cmd}' not found. Install with: {hint}\n")
 
-REF    = Path("ecoli_k12.fna")
+REF    = Path("tested_genome/ecoli_k12.fna")
 READS  = Path("ecoli_reads.fastq.gz")
 OUTDIR = Path("ecoli_output")
 

@@ -1,0 +1,58 @@
+==============================================================
+DEMO 1 — Inherent ambiguity (5 equally-optimal alignments)
+==============================================================
+
+ref:  AAAAA
+read: AAAA
+Optimal alignments found: 5   (all with score 3.0)
+
+  Alternative 1:  CIGAR = 4M1D
+    target            0 AAAAA 5
+                      0 ||||- 5
+    query             0 AAAA- 4
+
+  Alternative 2:  CIGAR = 3M1D1M
+    target            0 AAAAA 5
+                      0 |||-| 5
+    query             0 AAA-A 4
+
+  Alternative 3:  CIGAR = 2M1D2M
+    target            0 AAAAA 5
+                      0 ||-|| 5
+    query             0 AA-AA 4
+
+  Alternative 4:  CIGAR = 1M1D3M
+    target            0 AAAAA 5
+                      0 |-||| 5
+    query             0 A-AAA 4
+
+  Alternative 5:  CIGAR = 1D4M
+    target            0 AAAAA 5
+                      0 -|||| 5
+    query             0 -AAAA 4
+
+-> A standard SAM output would record ONE of these and discard the rest.
+
+==============================================================
+DEMO 2 — Parameter-induced flip (point mutation vs. indel pair)
+==============================================================
+
+ref:  ACGTACGTACGT
+read: ACGTAAGTACGT
+
+--- MISMATCH-FRIENDLY (mismatch cheap, gaps expensive) ---
+    params: {'match': 2, 'mismatch': -1, 'open_gap': -10, 'extend_gap': -10}
+    result: score=21.0  CIGAR=12M
+    target            0 ACGTACGTACGT 12
+                      0 |||||.|||||| 12
+    query             0 ACGTAAGTACGT 12
+
+--- GAP-FRIENDLY (mismatch expensive, gaps cheap) ---
+    params: {'match': 2, 'mismatch': -20, 'open_gap': -1, 'extend_gap': -1}
+    result: score=20.0  CIGAR=5M1D1I6M
+    target            0 ACGTAC-GTACGT 12
+                      0 |||||--|||||| 13
+    query             0 ACGTA-AGTACGT 12
+
+-> Interpretation flipped from '1 point mutation' to '1 deletion + 1 insertion'.
+   Same input. Different biology reported. The rejected claim is not recorded.
